@@ -6,7 +6,7 @@ const mkRegexp = fnName => {
 };
 
 const transform = objString => {
-  return objString.replace(/'[^']+\.svg'/g, "require($&)");
+  return objString.replace(/'[^']+\.svg'/g, "require($&).default.content");
 };
 
 const loader = function(source, inputSourceMap) {
