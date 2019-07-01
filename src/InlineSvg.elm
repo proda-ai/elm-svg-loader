@@ -1,4 +1,4 @@
-module InlineSvg exposing (Helpers, inline)
+module InlineSvg exposing (inline, Helpers)
 
 {-| This library allows you to inline external SVG file into Elm views.
 
@@ -8,7 +8,7 @@ module InlineSvg exposing (Helpers, inline)
 
 import Html exposing (Html, text)
 import Svg exposing (Attribute, svg)
-import SvgParser exposing (SvgNode(..), parseToNode, toAttribute, nodeToSvg)
+import SvgParser exposing (SvgNode(..), nodeToSvg, parseToNode, toAttribute)
 
 
 {-| This is the record returned from `inline` function. `icon` function is used to access individual SVG document, you can also pass a list of attributes to the SVG.
@@ -47,15 +47,15 @@ inline icons =
         svgIcons =
             SvgIcons icons
     in
-        { icon = icon svgIcons
-        }
+    { icon = icon svgIcons
+    }
 
 
 icon : SvgIcons icons -> (icons -> String) -> List (Attribute msg) -> Html msg
 icon (SvgIcons icons) accessor attrs =
     case parseToNode (accessor icons) of
         Ok (SvgElement element) ->
-            svg ((List.map toAttribute element.attributes) ++ attrs)
+            svg (List.map toAttribute element.attributes ++ attrs)
                 (List.map nodeToSvg element.children)
 
         _ ->

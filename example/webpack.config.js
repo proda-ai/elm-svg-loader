@@ -18,7 +18,7 @@ module.exports = {
           {
             loader: "elm-svg-loader",
             options: {
-              package: "user/project"
+              package: "author/project"
             }
           },
           {

@@ -1,17 +1,18 @@
-module Main exposing (..)
+module Main exposing (icon, main, view)
 
-import Html exposing (Html, div, text)
-import Svg.Attributes
-import InlineSvg exposing (inline)
 import Child
+import Browser
+import Html exposing (Html, div, text)
+import InlineSvg exposing (inline)
+import Svg.Attributes
 
 
-{ icon } =
+icon =
     inline
         { eye = "./svg/eye.svg"
         , github = "./svg/mark-github.svg"
         , code = "./svg/code.svg"
-        }
+        } |> .icon
 
 
 view : () -> Html ()
@@ -22,13 +23,14 @@ view () =
         , icon .github [ Svg.Attributes.class "icon" ]
         , icon .code [ Svg.Attributes.class "icon" ]
         , Child.view
+        , text  "Hello World"
         ]
 
 
-main : Program Never () ()
+main : Program () () ()
 main =
-    Html.beginnerProgram
-        { model = ()
+    Browser.sandbox
+        { init = ()
         , update = \() () -> ()
         , view = view
         }

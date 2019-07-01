@@ -6,24 +6,28 @@ const mkRegexp = fnName => {
 };
 
 const transform = objString => {
-  return objString.replace(/'[^']+\.svg'/g, "require($&).default.content");
+  return objString.replace(/'[^']+\.svg'/g, 'require($&)');
 };
 
 const loader = function(source, inputSourceMap) {
   if (this.cacheable) this.cacheable();
 
   const config = loaderUtils.getOptions(this) || {};
-  const packageName = config.package || "rnons/elm-svg-loader";
+  if (!config.package) {
+    throw new Error('Must supply the "package" option to elm-svg-loader in webpack conf');
+  }
+
+  const packageName = config.package;
   config.module = config.module || "InlineSvg";
   config.tagger = config.tagger || "inline";
 
   const taggerName =
-    "_" +
     [
-      packageName.replace(/-/g, "_").replace(/\//g, "$"),
+      packageName.replace(/\-/g, "_").replace(/\//g, "$"),
       config.module.replace(/\./g, "_"),
       config.tagger
     ].join("$");
+
   const escapedTaggerName = taggerName.replace(/\$/g, "\\$");
 
   const regexp = mkRegexp(escapedTaggerName);

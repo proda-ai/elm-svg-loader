@@ -1,13 +1,13 @@
-module Child exposing (..)
+module Child exposing (icon, view)
 
-import Html exposing (Html, div)
+import Html exposing (Html, div, text)
 import InlineSvg exposing (inline)
 
 
-{ icon } =
+icon  =
     inline
         { code = "./svg/code.svg"
-        }
+        } |> .icon
 
 
 view : Html ()
