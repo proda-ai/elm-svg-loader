@@ -1,7 +1,7 @@
 {
     "type": "package",
     "name": "proda-ai/elm-svg-loader",
-    "summary": "elm 0.19 version of inline SVG document github.com/rnons/elm-svg-loader",
+    "summary": "Elm 0.19 fork github.com/rnons/elm-svg-loader inline SVG document",
     "license": "BSD-3-Clause",
     "version": "1.0.0",
     "exposed-modules": [
