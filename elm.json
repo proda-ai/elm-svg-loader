@@ -3,7 +3,7 @@
     "name": "proda-ai/elm-svg-loader",
     "summary": "Elm 0.19 fork github.com/rnons/elm-svg-loader inline SVG document",
     "license": "BSD-3-Clause",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "exposed-modules": [
         "InlineSvg"
     ],
