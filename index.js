@@ -6,18 +6,14 @@ const mkRegexp = fnName => {
 };
 
 const transform = objString => {
-  return objString.replace(/'[^']+\.svg'/g, 'require($&)');
+  return objString.replace(/'[^']+\.svg'/g, 'require($&).default.content');
 };
 
 const loader = function(source, inputSourceMap) {
   if (this.cacheable) this.cacheable();
 
   const config = loaderUtils.getOptions(this) || {};
-  if (!config.package) {
-    throw new Error('Must supply the "package" option to elm-svg-loader in webpack conf');
-  }
-
-  const packageName = config.package;
+  const packageName = 'proda_ai/elm-svg-loader';
   config.module = config.module || "InlineSvg";
   config.tagger = config.tagger || "inline";
 
